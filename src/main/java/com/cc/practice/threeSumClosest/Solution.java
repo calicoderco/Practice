@@ -13,7 +13,9 @@ class Solution {
         int lowestDiff = Integer.MAX_VALUE;
         for(int i = 0; i <= nums.length - 3; i++) {
             for(int j = i + 1; j < k; j++) {
-                int divider = k; //the divider for this current iteration
+                int left = j + 1;
+                int right = k;
+                int divider = left + ((right - left) / 2); //the divider for this current iteration
 
                 //binary search for a place in nums from index j + 1 to k - 1 where for all sum including nums[divider],...,nums[k - 1] are above target
                 //and sum including nums[j + 1],..,nums[divider - 1] are below target.
@@ -21,15 +23,18 @@ class Solution {
                 //the number of dividing indexes is one greater than the length of the input array because there are imaginary dividers at the ends of the array
                 //divider could end up being k or j + 1, it is okay. that just means either all the sums are greater than target or all the sums are less than target
                 final int ijSum = nums[i] + nums[j];
-                while(!((divider == k || ijSum + nums[divider] >= target) && (divider == j + 1 || ijSum + nums[divider - 1] <= target))) {
+                while(!((divider == k || divider == right || ijSum + nums[divider] >= target) && (divider == j + 1  || divider == left || ijSum + nums[divider - 1] <= target))) {
                     if( divider > j + 1 && target < ijSum + nums[divider - 1]) {
                         //go to the left side
-                        divider = j + 1 + ((divider - (j + 2)) / 2);
+                        right = divider;
+                        divider = left + ((right - left) / 2);
+
                     }
 
                     if(divider < k && target > ijSum + nums[divider]) {
                         //go to the right side
-                        divider = divider + ((k - (divider)) / 2);
+                        left = divider;
+                        divider = left + ((right - left) / 2) + 1;
                     }
                 }
 
@@ -52,7 +57,7 @@ class Solution {
                 }
 
                 //move the permanent divider
-                k = divider;
+                k = right;
             }
         }
 
