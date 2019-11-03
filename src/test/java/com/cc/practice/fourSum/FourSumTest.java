@@ -27,11 +27,13 @@ public class FourSumTest {
         /*results = solution.fourSum(new int[]{1,0,-1,0,-2,2}, 0);
         Assert.assertTrue(test(results, new int[]{-2,-1,1,2}));
         Assert.assertTrue(test(results, new int[]{-2,0,0,2}));
-        Assert.assertTrue(test(results, new int[]{-1,0,0,1}));*/
+        Assert.assertTrue(test(results, new int[]{-1,0,0,1}));
 
 
-        /*results = solution.fourSum(new int[]{0,0,0,0}, 0);
+        results = solution.fourSum(new int[]{0,0,0,0}, 0);
         Assert.assertTrue(test(results, new int[]{0,0,0,0}));*/
+
+
 
         results = solution.fourSum(new int[]{-3,-2,-1,0,0,1,2,3}, 0);
         //Assert.assertTrue(test(results, new int[]{0,0,0,0}));
