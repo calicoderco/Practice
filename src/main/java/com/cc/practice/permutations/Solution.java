@@ -1,11 +1,11 @@
 package com.cc.practice.permutations;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 class Solution {
     /*public List<List<Integer>> permute(int[] nums) {
+<<<<<<< HEAD
         return permute(nums, 0);
     }
 
@@ -65,4 +65,5 @@ class Solution {
             input.add(removed);
         }
     }
+
 }
