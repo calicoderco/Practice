@@ -14,32 +14,31 @@ class Solution {
         int k = 2;
         int l = nums.length - 1;
 
-        while(i < nums.length - 3) {
+        while(i < l - 2) {
             int sum = nums[i] + nums[j] + nums[k] + nums[l];
+
             if(target > sum) {
                 if(k < l - 1) {
                     k++;
-                } else if(j < k - 1) {
+                } else if(j < l - 2) {
                     j++;
-                } else {
-                    i++;
-                }
-            } else if(target < sum) {
-                if(l > k + 1) {
-                    l--;
                     k = j + 1;
-                } else if(k > j + 2) {
-                    k--;
-                    j++;
-                } else if(j > i + 2) {
-                    j--;
-                    i++;
-                } else if(i >= l - 3) {
-                    break;
                 } else {
                     i++;
                     j = i + 1;
                     k = j + 1;
+                }
+            } else if(target < sum) {
+                if(k < l - 1) {
+                    l--;
+                } else if(j < l - 2) {
+                    j++;
+                    k = j + 1;
+                } else {
+                    i++;
+                    j = i + 1;
+                    k = j + 1;
+                    l--;
                 }
             } else {
                 List<Integer> result = new LinkedList<Integer>();
@@ -49,17 +48,48 @@ class Solution {
                 result.add(nums[l]);
                 results.add(result);
 
-                if (k < l - 1) {
-                    k++;
-                } else if (j < k - 1) {
-                    j++;
-                    k = j + 1;
-                } else if (i >= l - 3) {
-                    break;
-                } else {
+                boolean changed = false;
+                while(nums[i + 1] == nums[i] && nums[j + 1] == nums[j] && nums[k + 1] == nums[k]) {
                     i++;
-                    j = i + 1;
-                    k = j + 1;
+                    j++;
+                    k++;
+                }
+
+
+                /*while(l > k + 1 && nums[l - 1] == nums[l]) {
+                    l--;
+                    changed = true;
+                }
+
+                if(!changed) {
+                    while(k < l - 1 && nums[k + 1] == nums[k]) {
+                        k++;
+                        changed = true;
+                    }
+                }
+
+                if(!changed) {
+                    while( j < k - 1 && nums[j + 1] == nums[j]) {
+                        j++;
+                        changed = true;
+                    }
+
+                    if(changed) {
+                        k = j + 1;
+                    }
+                }*/
+
+                if(!changed) {
+                    if(k < l - 1) {
+                        k++;
+                    } else if(j < l - 2) {
+                        j++;
+                        k = j + 1;
+                    } else {
+                        i++;
+                        j = i + 1;
+                        k = j + 1;
+                    }
                 }
             }
         }
